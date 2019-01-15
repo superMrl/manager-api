@@ -1,0 +1,29 @@
+server:
+  port: 9400
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 9000
+
+feign:
+  hystrix:
+    enabled: true #熔断机制
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+
+eureka:
+  instance:
+    hostname: localhost  #eureka客户端主机实例名称
+    appname: manager-api  #客户端服务名
+    instance-id: manager-api:9400 #客户端实例名称
+    prefer-ip-address: true #显示IP
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:9500/eureka/
+
